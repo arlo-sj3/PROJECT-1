@@ -10,7 +10,7 @@ var snake2 = 35;
 var height = 46;
 var width = 70;
 var interval = 100;
-var increment = 1;
+var increment = 50;
 
 // game vars
 var length = 0;
@@ -97,15 +97,15 @@ window.addEventListener("keydown", function key(event) {
       direction = 1;
     }
     // for DOWN
-     else if (key === 40){
+     else if (direction != 1 && key === 40){
       direction = 2;
     }
     //for LEFT
-     else if ((key === 37 )){
+     else if (direction != -1 && key === 37 ){
       direction = 0;
     }
     //for RIGHT
-    else if (key === 39){
+    else if (direction != 0 && key === 39){
       direction = -1;
     }
 
@@ -137,6 +137,10 @@ function update() {
         snake1++;
     }
     set(snake1, snake2, 'snake');
+    if(snake1 == fK && snake2 == fI){
+      createFood();
+      length +=increment;
+    }
 }
 
 function updateTail() {
