@@ -10,7 +10,7 @@ var snake2 = 35;
 var height = 46;
 var width = 70;
 var interval = 100;
-var increment = 50;
+var increment = 5;
 
 // game vars
 var length = 0;
