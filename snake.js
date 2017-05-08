@@ -89,21 +89,26 @@ function createFood() {
     fI = foodI;
 }
 
-window.addEventListener("keypress", function key() {
+window.addEventListener("keydown", function key(event) {
     var key = event.keyCode;
     //for UP
     console.log(event.keyCode)
-    if (direction != -1 && (key === 87))
-        direction = 0;
-    //for DOWN
-    else if (direction != 0 && (key === 83))
-        direction = -1;
+    if (direction != 2 && key === 38){
+      direction = 1;
+    }
+    // for DOWN
+     else if (key === 40){
+      direction = 2;
+    }
     //for LEFT
-    else if (direction != 2 && (key === 65 ))
-        direction = 1;
+     else if ((key === 37 )){
+      direction = 0;
+    }
     //for RIGHT
-    else(direction != 1 && key === 68)
-    direction = 2;
+    else if (key === 39){
+      direction = -1;
+    }
+
     if (!running)
         running = true;
     else if (key === 32)
