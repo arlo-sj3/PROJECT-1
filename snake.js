@@ -22,10 +22,10 @@ $(document).ready(function() {
 });
 
 // settings
-var snake1 = 23;
-var snake2 = 35;
-var height = 46;
-var width = 70;
+var snake1 = 20;
+var snake2 = 38;
+var height = 40;
+var width = 76;
 var interval = 100;
 var increment = 5;
 
