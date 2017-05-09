@@ -178,12 +178,12 @@ function update() {
       createFood();
       length +=increment;
       if(score === 1 || score % 3 === 0 ){
-      $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
-      console.log(data)
-          funfact = data.text
-          $('#funfact').html('FUN FACT: '+ funfact);
-
-      })
+      // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
+      // console.log(data)
+      //     funfact = data.text
+      //     $('#funfact').html('FUN FACT: '+ funfact);
+      //
+      // })
     }
     }
 

@@ -4,6 +4,7 @@ h1{
   font-size: 50px;
   text-align: center;
   font-family: 'MedievalSharp', cursive;
+  text-decoration: underline;
 
 }
 
@@ -14,8 +15,10 @@ h1{
 
 body{
   background-size: cover;
+
   background-image: url('https://vignette2.wikia.nocookie.net/darkscape/images/3/33/Al_Kharid.png/revision/latest?cb=20151222154040');
   /*background-color: #90c040;*/
+
   width: 100vw;
 }
 
@@ -57,6 +60,7 @@ h2{
 }
 
 #funfact{
+  display:none;
   color: white;
   position: absolute;
   /*top: 86%;*/
