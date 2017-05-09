@@ -12,11 +12,11 @@ $(document).ready(function() {
   $('#song3').on('click',function(event){
     song3.play();
   })
-  $('#song1').on('click',function(event){
-    song1.pause();
-    // song2.pause();
-    // song3.pause();
-  })
+  // $('#song1').on('click',function(event){
+  //   song1.pause();
+  //   song2.pause();
+  //   song3.pause();
+  // })
   //difficulties
   $('#diff1').on('click',function(){
     interval = 10
