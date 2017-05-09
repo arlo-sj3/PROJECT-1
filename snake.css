@@ -50,13 +50,15 @@ td{
 }
 
 h2{
-
+  margin-left: 2%;
+  /*box-sizing: border-box;*/
   /*opacity: .75;*/
-  display:inline-block;
+  display: inline-block;
   background-color: rgba(0,0,0,.3);
   /*color: #244375;*/
   color: yellow;
   font-family: 'MedievalSharp', cursive;
+
 }
 
 #funfact{
@@ -142,4 +144,36 @@ h3{
 
 .space{
   width: 100%;
+}
+
+#diff1{
+  background-color: #b2dbee;
+  font-family: 'MedievalSharp', cursive;
+}
+
+#diff2{
+  background-color: #b2dbee;
+  font-family: 'MedievalSharp', cursive;
+}
+
+#diff3{
+  background-color: #b2dbee;
+  font-family: 'MedievalSharp', cursive;
+}
+
+#diff4{
+  background-color: #b2dbee;
+  font-family: 'MedievalSharp', cursive;
+}
+#diff1:hover{
+  background-color: grey;
+}
+#diff2:hover{
+    background-color: grey;
+}
+#diff3:hover{
+    background-color: grey;
+}
+#diff4:hover{
+    background-color: grey;
 }

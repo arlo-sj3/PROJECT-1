@@ -1,6 +1,8 @@
 $(document).ready(function() {
+//scores
   $('#score').html('SCORE: '+ score);
   $('#hiscore').html('HI-SCORE: '+ hiscore);
+  //songs
   $('#song1').on('click',function(event){
     song1.play();
   })
@@ -10,10 +12,14 @@ $(document).ready(function() {
   $('#song3').on('click',function(event){
     song3.play();
   })
-  $('.butt btn btn-success btn-lg').on('click',function(event){
+  $('#song1').on('click',function(event){
     song1.pause();
-    song2.pause();
-    song3.pause();
+    // song2.pause();
+    // song3.pause();
+  })
+  //difficulties
+  $('#diff1').on('click',function(){
+    interval = 10
   })
     // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
     // console.log(data)
@@ -28,6 +34,7 @@ var height = 40;
 var width = 76;
 var interval = 100;
 var increment = 5;
+var playing = false
 
 // game vars
 var length = 0;
