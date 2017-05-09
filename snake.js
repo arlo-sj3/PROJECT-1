@@ -1,6 +1,20 @@
 $(document).ready(function() {
   $('#score').html('SCORE: '+ score);
   $('#hiscore').html('HI-SCORE: '+ hiscore);
+  $('#song1').on('click',function(event){
+    song1.play();
+  })
+  $('#song2').on('click',function(event){
+    song2.play();
+  })
+  $('#song3').on('click',function(event){
+    song3.play();
+  })
+  $('.butt btn btn-success btn-lg').on('click',function(event){
+    song1.pause();
+    song2.pause();
+    song3.pause();
+  })
     // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
     // console.log(data)
     //     funfact = data.text
@@ -28,6 +42,9 @@ var int;
 var score = 0;
 var hiscore = localStorage.getItem('HI-SCORE: ');
 var funfact = ''
+var song1 = new Audio('Harmony (Old Music).mp3');
+ var song2 = new Audio('Medieval (Old Music).mp3');
+ var song3 = new Audio('Sea Shanty (Old Music) (1).mp3');
 
 //start with scores
 
