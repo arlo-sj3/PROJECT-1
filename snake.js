@@ -22,6 +22,7 @@ var running = false;
 var gameOver = false;
 var direction = -1; //up = 0, down = -1, left  = 1, right = 2.
 var int;
+var score = 0;
 
 //starting point
 function run() {
@@ -137,10 +138,21 @@ function update() {
         snake1++;
     }
     set(snake1, snake2, 'snake');
+    for(var i = tail1.length-1; i>=0; i--){
+      if(snake1 === tail1[i] && snake2 === tail2[i]){
+        gameOver = true;
+        break;
+      }
+    }
+    if(snake1 === 0 || snake1 === height-1 || snake2 === 0 || snake2 === width-1)
+    gameOver = true;
     if(snake1 == fK && snake2 == fI){
+      score +=1;
       createFood();
       length +=increment;
     }
+    //change to JQUERY
+    document.getElementById('score').innerHTML = 'Score: '+ score;
 }
 
 function updateTail() {
@@ -152,4 +164,9 @@ function updateTail() {
     tail2[0] = snake2;
 }
 
+// function alrt(){
+//   if (gameOver === true){
+//     alert('GAME OVER! Refresh the page to play again.')
+//   }
+// }
 run();
