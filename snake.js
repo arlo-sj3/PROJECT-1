@@ -23,6 +23,7 @@ var gameOver = false;
 var direction = -1; //up = 0, down = -1, left  = 1, right = 2.
 var int;
 var score = 0;
+var hiscore = localStorage.getItem('HI-SCORE: ');
 
 //starting point
 function run() {
@@ -141,18 +142,21 @@ function update() {
     for(var i = tail1.length-1; i>=0; i--){
       if(snake1 === tail1[i] && snake2 === tail2[i]){
         gameOver = true;
+        alrt();
         break;
       }
     }
     if(snake1 === 0 || snake1 === height-1 || snake2 === 0 || snake2 === width-1)
     gameOver = true;
+    alrt();
     if(snake1 == fK && snake2 == fI){
       score +=1;
       createFood();
       length +=increment;
     }
-    //change to JQUERY
-    document.getElementById('score').innerHTML = 'Score: '+ score;
+    
+    $('#score').html('SCORE: '+ score);
+    $('#hiscore').html('HI-SCORE: '+ hiscore);
 }
 
 function updateTail() {
@@ -164,9 +168,10 @@ function updateTail() {
     tail2[0] = snake2;
 }
 
-// function alrt(){
-//   if (gameOver === true){
-//     alert('GAME OVER! Refresh the page to play again.')
-//   }
-// }
+function alrt(){
+  if (gameOver === true){
+    alert('GAME OVER! Refresh the page to play again.')
+    if(score>localStorage.getItem('HI-SCORE: '))localStorage.setItem('HI-SCORE: ',score)
+  }
+}
 run();
