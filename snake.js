@@ -1,6 +1,9 @@
 $(document).ready(function() {
+  $('#score').html('SCORE: '+ score);
+  $('#hiscore').html('HI-SCORE: '+ hiscore);
     // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
-    //     console.log(data)
+    // console.log(data)
+    //     funfact = data.text
     // })
 });
 
@@ -24,6 +27,10 @@ var direction = -1; //up = 0, down = -1, left  = 1, right = 2.
 var int;
 var score = 0;
 var hiscore = localStorage.getItem('HI-SCORE: ');
+var funfact = ''
+
+//start with scores
+
 
 //starting point
 function run() {
@@ -153,8 +160,16 @@ function update() {
       score +=1;
       createFood();
       length +=increment;
+      if(score === 1 || score % 3 === 0 ){
+      $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
+      console.log(data)
+          funfact = data.text
+          $('#funfact').html('FUN FACT: '+ funfact);
+
+      })
     }
-    
+    }
+
     $('#score').html('SCORE: '+ score);
     $('#hiscore').html('HI-SCORE: '+ hiscore);
 }

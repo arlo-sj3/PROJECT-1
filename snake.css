@@ -1,6 +1,10 @@
-/*h1{
-  color:blue
-}*/
+h1{
+  color:white;
+  font-weight: bolder;
+  font-size: 50px;
+  text-align: center;
+
+}
 
 *{
   padding: 0;
@@ -39,4 +43,14 @@ td{
 
 h2{
   color: white;
+}
+
+#funfact{
+  color: violet;
+}
+
+.butt{
+  /*height: 20px;*/
+  /*width: 20px;*/
+  /*background-color: pink;*/
 }
