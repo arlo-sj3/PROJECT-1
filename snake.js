@@ -23,8 +23,26 @@ $(document).ready(function() {
 
   //difficulties
   $('#diff1').on('click',function(){
-    interval = 10
+    console.log('hi')
+    window.clearInterval(int);
+    int = setInterval(gameLoop, 300)
   })
+  $('#diff2').on('click',function(){
+    console.log('hi')
+    window.clearInterval(int);
+    int = setInterval(gameLoop, 100)
+  })
+  $('#diff3').on('click',function(){
+    console.log('hi')
+    window.clearInterval(int);
+    int = setInterval(gameLoop, 50)
+  })
+  $('#diff4').on('click',function(){
+    console.log('hi')
+    window.clearInterval(int);
+    int = setInterval(gameLoop, 10)
+  })
+
     // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
     // console.log(data)
     //     funfact = data.text
@@ -46,7 +64,7 @@ var snake1 = 20;
 var snake2 = 38;
 var height = 40;
 var width = 76;
-var interval = 100;
+var interval = 9999;
 var increment = 5;
 var playing = false
 
@@ -58,7 +76,7 @@ var fK;
 var fI;
 var running = false;
 var gameOver = false;
-var direction = -1; //up = 0, down = -1, left  = 1, right = 2.
+var direction; //up = 0, down = -1, left  = 1, right = 2.
 var int;
 var score = 0;
 var hiscore = localStorage.getItem('HI-SCORE: ');
@@ -222,9 +240,10 @@ function updateTail() {
     tail2[0] = snake2;
 }
 
+
 function alrt(){
   if (gameOver === true){
-    alert('GAME OVER! Refresh the page to play again.')
+    // alert('GAME OVER! Refresh the page to play again.')
     if(score>localStorage.getItem('HI-SCORE: '))localStorage.setItem('HI-SCORE: ',score)
   }
 }
@@ -237,4 +256,45 @@ if (localStorage.getItem('HI-SCORE: ')===null || localStorage.getItem('HI-SCORE:
   $('#hiscore').html('HI-SCORE: '+ localStorage.getItem('HI-SCORE: '));
 }
 
+
+
 run();
+
+function resetvars(){
+  var snake1 = 20;
+  var snake2 = 38;
+  var height = 40;
+  var width = 76;
+  var interval = 100;
+  var increment = 5;
+  var playing = false
+
+  // game vars
+  var length = 0;
+  var tail1 = [snake1];
+  var tail2 = [snake2];
+  var fK;
+  var fI;
+  var running = false;
+  var gameOver = false;
+  var direction; //up = 0, down = -1, left  = 1, right = 2.
+  var int;
+  var score = 0;
+  var hiscore = localStorage.getItem('HI-SCORE: ');
+  var funfact = ''
+  var song1 = new Audio('Harmony (Old Music).mp3');
+   var song2 = new Audio('Medieval (Old Music).mp3');
+   var song3 = new Audio('Sea Shanty (Old Music) (1).mp3');
+   var song4 = new Audio('Black Sabbath - War Pigs.mp3')
+}
+
+function playAgain(){
+  if (gameOver === true){
+    resetvars();
+  }
+
+}
+
+$('#restart').on('click',function(){
+  playAgain();
+})
