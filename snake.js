@@ -12,6 +12,9 @@ $(document).ready(function() {
   $('#song3').on('click',function(event){
     song3.play();
   })
+  $('#song4').on('click',function(event){
+    song4.play();
+  })
   // $('#song1').on('click',function(event){
   //   song1.pause();
   //   song2.pause();
@@ -52,6 +55,7 @@ var funfact = ''
 var song1 = new Audio('Harmony (Old Music).mp3');
  var song2 = new Audio('Medieval (Old Music).mp3');
  var song3 = new Audio('Sea Shanty (Old Music) (1).mp3');
+ var song4 = new Audio('Black Sabbath - War Pigs.mp3')
 
 //start with scores
 
