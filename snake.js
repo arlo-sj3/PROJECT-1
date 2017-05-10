@@ -1,7 +1,12 @@
 $(document).ready(function() {
+
+  highScore0()
+  // if ($('#hiscore').html()==='HI-SCORE: null'){
+  //   $('#hiscore').html()==='HI-SCORE: 0'
+  // }
 //scores
   $('#score').html('SCORE: '+ score);
-  $('#hiscore').html('HI-SCORE: '+ hiscore);
+  $('#hiscore').html('HI-SCORE: '+ localStorage.getItem('HI-SCORE: '));
   //songs
   $('#song1').on('click',function(event){
     song1.toggle();
@@ -205,7 +210,7 @@ function update() {
     }
 
     $('#score').html('SCORE: '+ score);
-    $('#hiscore').html('HI-SCORE: '+ hiscore);
+    $('#hiscore').html('HI-SCORE: '+ localStorage.getItem('HI-SCORE: '));
 }
 
 function updateTail() {
@@ -223,4 +228,13 @@ function alrt(){
     if(score>localStorage.getItem('HI-SCORE: '))localStorage.setItem('HI-SCORE: ',score)
   }
 }
+
+function highScore0(){
+  // debugger;
+if (localStorage.getItem('HI-SCORE: ')===null || localStorage.getItem('HI-SCORE: ')===undefined ){
+  localStorage.setItem('HI-SCORE: ', 0)
+}
+  $('#hiscore').html('HI-SCORE: '+ localStorage.getItem('HI-SCORE: '));
+}
+
 run();
