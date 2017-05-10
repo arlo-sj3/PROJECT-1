@@ -4,22 +4,18 @@ $(document).ready(function() {
   $('#hiscore').html('HI-SCORE: '+ hiscore);
   //songs
   $('#song1').on('click',function(event){
-    song1.play();
+    song1.toggle();
   })
   $('#song2').on('click',function(event){
-    song2.play();
+    song2.toggle();
   })
   $('#song3').on('click',function(event){
-    song3.play();
+    song3.toggle();
   })
   $('#song4').on('click',function(event){
-    song4.play();
+    song4.toggle();
   })
-  // $('#song1').on('click',function(event){
-  //   song1.pause();
-  //   song2.pause();
-  //   song3.pause();
-  // })
+
   //difficulties
   $('#diff1').on('click',function(){
     interval = 10
@@ -29,6 +25,16 @@ $(document).ready(function() {
     //     funfact = data.text
     // })
 });
+//song play-pause
+Audio.prototype.toggle = function (){
+  if (this.playing){
+    this.pause();
+    this.playing = false;
+  }else{
+    this.play();
+    this.playing = true;
+  }
+}
 
 // settings
 var snake1 = 20;
