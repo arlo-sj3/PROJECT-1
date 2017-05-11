@@ -1,6 +1,7 @@
 $(document).ready(function() {
     //hi-score  null bug fixed
-    highScore0()
+    highScore0();
+    // keysOn();
 
     //scores
     $('#score').html('SCORE: ' + score);
@@ -42,6 +43,30 @@ $(document).ready(function() {
     $('#restart').on('click', function() {
         restart();
     })
+
+    //True False buttons
+    $('.trueFalse').on('click', function(event){
+      var guess = event.target.id
+      var answer = $('#funfact').data().answer;
+    if(guess == answer){
+      $('.modal').css('display','none');
+      // running = true;
+      setTimeout(function(){
+        running = true;
+      },1000);
+      score += 10;
+    }else{
+      $('.modal').css('display','none');
+      // running = true;
+      setTimeout(function(){
+        running = true;
+      },1000);
+      score += 10;
+    }
+    })
+
+    //timeout for resume
+
 
 });
 
@@ -110,6 +135,9 @@ function restart() {
 //For play and pause
 function gameLoop() {
     if (running && !gameOver) {
+      // if($('.modal').css('display') === 'block'){
+      //   running === false
+      // }
         update();
     } else if (gameOver) {
         clearInterval(int);
@@ -180,7 +208,7 @@ function getRandomint(min, max) {
 window.addEventListener("keydown", function key(event) {
     var key = event.keyCode;
     //for UP
-    if (direction != 2 && key === 38) {
+    if (direction != 2 && key === 38)  {
         direction = 1;
     }
     // for DOWN
@@ -196,11 +224,14 @@ window.addEventListener("keydown", function key(event) {
         direction = -1;
     }
 
-    if (!running)
+//starts on a keydown
+    if (!running && $('.modal').css('display')==='none' )
         running = true;
     else if (key === 32)
         running = false;
 });
+
+
 
 //for moving the snake
 function update() {
@@ -234,14 +265,17 @@ function update() {
         createFood();
         length += increment;
         if (score === 1 || score % 7 === 0) {
-          running = false;
           $('.modal').css('display','block');
+          running = false;
+          // disable();
              $.get('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy', function(data) {
             console.log(data)
             var onlyTrue = trueFalse(data)
             console.log(onlyTrue)
-                funfact = onlyTrue[getRandomint(0,10)].question
+            var num = getRandomint(0,10)
+                funfact = onlyTrue[num].question
                 $('#funfact').html('QUESTION: '+ funfact);
+                $('#funfact').data('answer',onlyTrue[num].correct_answer)
 //https://opentdb.com/api.php?amount=10&type=boolean
             })
         }
@@ -288,6 +322,22 @@ function highScore0() {
     }
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
 }
+//disable keys for modal
+// function disable(){
+//   if($('.modal').css('display')==='block')
+//   {
+//     var key = event.keyCode;
+//     window.removeEventListener("keydown", function key(event){
+//
+//     }
+//     console.log('something')
+//
+//   //   document.onkeydown = function(){
+//   //
+//   //     return false;
+//   //   }
+//   }
+// }
 
 //run game!
 run();
