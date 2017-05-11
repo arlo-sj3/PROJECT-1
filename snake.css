@@ -194,12 +194,20 @@ h3 {
 }
 
 #restart {
+  margin-top: 175px;
+  position:absolute;
+  display:none;
     font-family: 'MedievalSharp', cursive;
     background-color: yellow;
     color: black;
+    animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 
 #restart:hover {
+  position: absolute;
     background-color: black;
     color: yellow;
 }

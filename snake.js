@@ -61,7 +61,7 @@ $(document).ready(function() {
       setTimeout(function(){
         running = true;
       },1000);
-      
+
     }
     })
 
@@ -141,6 +141,7 @@ function gameLoop() {
         update();
     } else if (gameOver) {
         clearInterval(int);
+        $('#restart').css('display','block');
     }
 }
 
@@ -354,6 +355,12 @@ function highScore0() {
 //   }
 // }
 
+
+ // function hiderestart(){
+ //   if(gameOver === false){
+ //     $('#restart').css('display','none');
+ //   }
+ // }
 //run game!
 run();
 
