@@ -42,6 +42,7 @@ $(document).ready(function() {
     //restart button
     $('#restart').on('click', function() {
         restart();
+        $('#restart').css('display','none');
     })
 
     //True False buttons
@@ -135,6 +136,7 @@ function restart() {
 //For play and pause
 function gameLoop() {
     if (running && !gameOver) {
+
       // if($('.modal').css('display') === 'block'){
       //   running === false
       // }
