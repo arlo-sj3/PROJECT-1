@@ -24,4 +24,4 @@ http://imgur.com/a/vNR1w
 
 ## Project Planner
 
-https://trello.com/arlo19
+ https://www.pivotaltracker.com/projects/2021587

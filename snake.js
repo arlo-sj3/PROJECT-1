@@ -1,12 +1,11 @@
 $(document).ready(function() {
-
+    //hi-score  null bug fixed
     highScore0()
-    // if ($('#hiscore').html()==='HI-SCORE: null'){
-    //   $('#hiscore').html()==='HI-SCORE: 0'
-    // }
+
     //scores
     $('#score').html('SCORE: ' + score);
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
+
     //songs
     $('#song1').on('click', function(event) {
         song1.toggle();
@@ -43,11 +42,13 @@ $(document).ready(function() {
         int = setInterval(gameLoop, 10)
     })
 
-    // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
-    // console.log(data)
-    //     funfact = data.text
-    // })
+    //restart button
+    $('#restart').on('click', function() {
+        restart();
+    })
+
 });
+
 //song play-pause
 Audio.prototype.toggle = function() {
     if (this.playing) {
@@ -76,32 +77,20 @@ var fK;
 var fI;
 var running = false;
 var gameOver = false;
-var direction; //up = 0, down = -1, left  = 1, right = 2.
+var direction; //up = 1, down = 2, left  = 0, right = -1.
 var int;
 var score = 0;
 var hiscore = localStorage.getItem('HI-SCORE: ');
 var funfact = ''
+
+//Audio files
 var song1 = new Audio('Harmony (Old Music).mp3');
 var song2 = new Audio('Medieval (Old Music).mp3');
 var song3 = new Audio('Sea Shanty (Old Music) (1).mp3');
 var song4 = new Audio('Black Sabbath - War Pigs.mp3')
 var se1 = new Audio('burning.mp3')
 var se2 = new Audio('gameover.mp3')
-//start with scores
 
-function restart() {
-    if (gameOver) {
-        $('#board').empty();
-        resetvars();
-        init();
-
-        // int;
-        // resetvars();
-        // createSnake();
-        // createFood();
-        // console.log('hey')
-    }
-}
 //starting point
 function run() {
     init();
@@ -109,16 +98,32 @@ function run() {
 }
 
 function init() {
-    console.log('hello')
     createMap();
     createSnake();
     createFood();
 }
 
+function restart() {
+    if (gameOver) {
+        $('#board').empty();
+        resetvars();
+        init();
+    }
+}
 
+//For play and pause
+function gameLoop() {
+    if (running && !gameOver) {
+        console.log('LOOP')
+        update();
+    } else if (gameOver) {
+        clearInterval(int);
+    }
+}
+
+//Creation functions
 function createMap() {
     let table = $('table');
-    // table.append('<p>hello</p>');
     for (var k = 0; k < height; k++) {
         let row = $('<tr></tr>');
         for (var i = 0; i < width; i++) {
@@ -130,29 +135,10 @@ function createMap() {
             $(table).append(row);
         }
     }
-    console.log(table)
 }
 
 function createSnake() {
     set(snake1, snake2, 'snake');
-}
-
-function get(k, i) {
-    return document.getElementById(k + '-' + i)
-}
-
-function set(k, i, value) {
-    if (k != null && i != null)
-        get(k, i).setAttribute('class', value);
-}
-
-function rand(min, max) {
-    // console.log()
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function getType(k, i) {
-    return get(k, i).getAttribute('class');
 }
 
 function createFood() {
@@ -170,6 +156,27 @@ function createFood() {
     fI = foodI;
 }
 
+//Get&Set functions
+function get(k, i) {
+    return document.getElementById(k + '-' + i)
+}
+
+function set(k, i, value) {
+    if (k != null && i != null)
+        get(k, i).setAttribute('class', value);
+}
+
+function getType(k, i) {
+    return get(k, i).getAttribute('class');
+}
+
+//Random generators
+function rand(min, max) {
+    // console.log()
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+//Game controls
 window.addEventListener("keydown", function key(event) {
     var key = event.keyCode;
     //for UP
@@ -196,15 +203,7 @@ window.addEventListener("keydown", function key(event) {
         running = false;
 });
 
-function gameLoop() {
-    if (running && !gameOver) {
-        console.log('LOOP')
-        update();
-    } else if (gameOver) {
-        clearInterval(int);
-    }
-}
-
+//for moving the snake
 function update() {
     set(fK, fI, 'food');
     updateTail();
@@ -218,6 +217,7 @@ function update() {
     } else if (direction === 2) {
         snake1++;
     }
+    //Game over conditions below
     set(snake1, snake2, 'snake');
     for (var i = tail1.length - 1; i >= 0; i--) {
         if (snake1 === tail1[i] && snake2 === tail2[i]) {
@@ -248,6 +248,7 @@ function update() {
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
 }
 
+//for moving snake tail
 function updateTail() {
     for (var i = length; i > 0; i--) {
         tail1[i] = tail1[i - 1];
@@ -257,7 +258,7 @@ function updateTail() {
     tail2[0] = snake2;
 }
 
-
+//sets new high score
 function alrt() {
     if (gameOver === true) {
         se2.play();
@@ -266,19 +267,19 @@ function alrt() {
     }
 }
 
+//for initial hi-score 0
 function highScore0() {
-    // debugger;
     if (localStorage.getItem('HI-SCORE: ') === null || localStorage.getItem('HI-SCORE: ') === undefined) {
         localStorage.setItem('HI-SCORE: ', 0)
     }
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
 }
 
-
-
-
+//run game!
 run();
 
+
+//resets global vars for new game without refreshing
 function resetvars() {
     snake1 = 20;
     snake2 = 38;
@@ -296,21 +297,9 @@ function resetvars() {
     fI;
     running = false;
     gameOver = false;
-    direction; //up = 0, down = -1, left  = 1, right = 2.
+    direction; //up = 1, down = 2, left  = 0, right = -1.
     int;
     score = 0;
     hiscore = localStorage.getItem('HI-SCORE: ');
 
 }
-
-// function playAgain(){
-//   if (gameOver === true){
-//     resetvars();
-//   }
-//
-// }
-
-$('#restart').on('click', function() {
-    // resetvars();
-    restart();
-})
