@@ -36,7 +36,7 @@ $(document).ready(function() {
     })
     $('#diff4').on('click', function() {
         window.clearInterval(int);
-        int = setInterval(gameLoop, 10)
+        int = setInterval(gameLoop, 25)
     })
 
     //restart button
@@ -61,7 +61,7 @@ $(document).ready(function() {
       setTimeout(function(){
         running = true;
       },1000);
-      score += 10;
+      
     }
     })
 
@@ -206,6 +206,7 @@ function getRandomint(min, max) {
 
 //Game controls
 window.addEventListener("keydown", function key(event) {
+  event.preventDefault();
     var key = event.keyCode;
     //for UP
     if (direction != 2 && key === 38)  {
@@ -231,10 +232,17 @@ window.addEventListener("keydown", function key(event) {
         running = false;
 });
 
+//to display instructions when paused
+function overB(){
+  if(running === true){
+     $('.overBoard').css('display','none')
+  }
+}
 
 
 //for moving the snake
 function update() {
+  overB();
     set(fK, fI, 'food');
     updateTail();
     set(tail1[length], tail2[length], 'blank');
@@ -265,10 +273,11 @@ function update() {
         createFood();
         length += increment;
         if (score === 1 || score % 7 === 0) {
-          $('.modal').css('display','block');
+
           running = false;
           // disable();
              $.get('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy', function(data) {
+               $('.modal').css('display','block');
             console.log(data)
             var onlyTrue = trueFalse(data)
             console.log(onlyTrue)
@@ -311,7 +320,9 @@ function alrt() {
     if (gameOver === true) {
         se2.play();
         // alert('GAME OVER! Refresh the page to play again.')
-        if (score > localStorage.getItem('HI-SCORE: ')) localStorage.setItem('HI-SCORE: ', score)
+        if (score > localStorage.getItem('HI-SCORE: ')){
+          localStorage.setItem('HI-SCORE: ', score);
+        }
     }
 }
 
@@ -319,7 +330,11 @@ function alrt() {
 function highScore0() {
     if (localStorage.getItem('HI-SCORE: ') === null || localStorage.getItem('HI-SCORE: ') === undefined) {
         localStorage.setItem('HI-SCORE: ', 0)
-    }
+      }else if (score > localStorage.getItem('HI-SCORE: ')){
+        localStorage.setItem('HI-SCORE: ', score);
+
+      }
+
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
 }
 //disable keys for modal
