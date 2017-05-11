@@ -22,22 +22,18 @@ $(document).ready(function() {
 
     //difficulties
     $('#diff1').on('click', function() {
-        console.log('hi')
         window.clearInterval(int);
         int = setInterval(gameLoop, 300)
     })
     $('#diff2').on('click', function() {
-        console.log('hi')
         window.clearInterval(int);
         int = setInterval(gameLoop, 100)
     })
     $('#diff3').on('click', function() {
-        console.log('hi')
         window.clearInterval(int);
         int = setInterval(gameLoop, 50)
     })
     $('#diff4').on('click', function() {
-        console.log('hi')
         window.clearInterval(int);
         int = setInterval(gameLoop, 10)
     })
@@ -114,7 +110,6 @@ function restart() {
 //For play and pause
 function gameLoop() {
     if (running && !gameOver) {
-        console.log('LOOP')
         update();
     } else if (gameOver) {
         clearInterval(int);
@@ -172,15 +167,19 @@ function getType(k, i) {
 
 //Random generators
 function rand(min, max) {
-    // console.log()
     return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getRandomint(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 //Game controls
 window.addEventListener("keydown", function key(event) {
     var key = event.keyCode;
     //for UP
-    console.log(event.keyCode)
     if (direction != 2 && key === 38) {
         direction = 1;
     }
@@ -234,18 +233,33 @@ function update() {
         score += 1;
         createFood();
         length += increment;
-        if (score === 1 || score % 3 === 0) {
-            // $.get('https://g-spoon.herokuapp.com/food/trivia/random', function(data) {
-            // console.log(data)
-            //     funfact = data.text
-            //     $('#funfact').html('FUN FACT: '+ funfact);
-            //
-            // })
+        if (score === 1 || score % 7 === 0) {
+          running = false;
+          $('.modal').css('display','block');
+             $.get('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy', function(data) {
+            console.log(data)
+            var onlyTrue = trueFalse(data)
+            console.log(onlyTrue)
+                funfact = onlyTrue[getRandomint(0,10)].question
+                $('#funfact').html('QUESTION: '+ funfact);
+//https://opentdb.com/api.php?amount=10&type=boolean
+            })
         }
     }
 
     $('#score').html('SCORE: ' + score);
     $('#hiscore').html('HI-SCORE: ' + localStorage.getItem('HI-SCORE: '));
+}
+
+//sifting through trivia
+function trueFalse(data){
+  var bool = [];
+  for(i = 0; i < data.results.length; i++){
+  if (data.results[i].type === "boolean"){
+    bool.push(data.results[i])
+  }
+}
+  return bool
 }
 
 //for moving snake tail
@@ -303,3 +317,5 @@ function resetvars() {
     hiscore = localStorage.getItem('HI-SCORE: ');
 
 }
+
+// 'https://g-spoon.herokuapp.com/food/trivia/random'
