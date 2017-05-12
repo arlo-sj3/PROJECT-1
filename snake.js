@@ -56,7 +56,7 @@ $(document).ready(function() {
         modalLoading = false;
         running = true;
       },1000);
-      score += 10;
+      score += 3;
     }else{
       $('.modal').css('display','none');
       // running = true;
