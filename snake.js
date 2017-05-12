@@ -53,6 +53,7 @@ $(document).ready(function() {
       $('.modal').css('display','none');
       // running = true;
       setTimeout(function(){
+        modalLoading = false;
         running = true;
       },1000);
       score += 10;
@@ -60,6 +61,7 @@ $(document).ready(function() {
       $('.modal').css('display','none');
       // running = true;
       setTimeout(function(){
+        modalLoading = false;
         running = true;
       },1000);
 
@@ -90,6 +92,7 @@ var width = 76;
 var interval = 9999;
 var increment = 5;
 var playing = false
+var modalLoading = false
 
 // game vars
 var length = 0;
@@ -230,7 +233,7 @@ window.addEventListener("keydown", function key(event) {
     }
 
 //starts on a keydown
-    if (!running && $('.modal').css('display')==='none' )
+    if (!running && !modalLoading)
         running = true;
     else if (key === 32)
         running = false;
@@ -279,23 +282,24 @@ function update() {
         length += increment;
         running = true;
         if (score === 1 || score % 7 === 0) {
-          // setTimeout(function(){
-          //   running = false;
-          // },1000);
-
           running = false;
+          modalLoading = true;
+
+https://opentdb.com/api.php?amount=50&category=9&difficulty=easy
+
           // disable();
              $.get('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy', function(data) {
                $('.modal').css('display','block');
-                 running = false;
-            console.log(data)
+
+
+
             var onlyTrue = trueFalse(data)
             console.log(onlyTrue)
-            var num = getRandomint(0,10)
+            var num = getRandomint(0,13)
                 funfact = onlyTrue[num].question
                 $('#funfact').html('QUESTION: '+ funfact);
                 $('#funfact').data('answer',onlyTrue[num].correct_answer);
-                  running = false;
+
 //https://opentdb.com/api.php?amount=10&type=boolean
             })
         }
@@ -383,7 +387,8 @@ function resetvars() {
     width = 76;
     interval = 100;
     increment = 5;
-    playing = false
+    playing = false;
+    modalLoading = false
 
     // game vars
     length = 0;
