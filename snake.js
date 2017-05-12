@@ -137,6 +137,7 @@ function restart() {
 function gameLoop() {
     if (running && !gameOver) {
 
+
       // if($('.modal').css('display') === 'block'){
       //   running === false
       // }
@@ -274,20 +275,27 @@ function update() {
         se1.play();
         score += 1;
         createFood();
+        running = false;
         length += increment;
+        running = true;
         if (score === 1 || score % 7 === 0) {
+          // setTimeout(function(){
+          //   running = false;
+          // },1000);
 
           running = false;
           // disable();
              $.get('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy', function(data) {
                $('.modal').css('display','block');
+                 running = false;
             console.log(data)
             var onlyTrue = trueFalse(data)
             console.log(onlyTrue)
             var num = getRandomint(0,10)
                 funfact = onlyTrue[num].question
                 $('#funfact').html('QUESTION: '+ funfact);
-                $('#funfact').data('answer',onlyTrue[num].correct_answer)
+                $('#funfact').data('answer',onlyTrue[num].correct_answer);
+                  running = false;
 //https://opentdb.com/api.php?amount=10&type=boolean
             })
         }

@@ -265,3 +265,19 @@ h4{
   margin-left: 15px;
   position:absolute;
 }
+
+.dynInst{
+  text-align: center;
+  margin-top: 10%;
+  font-size: 25px;
+  margin-left: 12%;
+  animation: blinker 0.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+.instructions{
+  margin-top: -18px;
+}
